@@ -3,7 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
-
+*.xlsx
+*.xlsx#
+src/main/resources/
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
