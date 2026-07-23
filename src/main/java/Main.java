@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        try (ExcelFile excel = new ExcelFile("src/main/resources/data/sample1.xlsx")) {
+        try (ExcelFile excel = new ExcelFile("src/main/resources/data/sample2.xlsx")) {
             ExcelReader reader = new ExcelReader();
             List<RegistroPlanilha> registros = reader.lerPrimeiraSheet(excel);
 
