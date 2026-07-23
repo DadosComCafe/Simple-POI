@@ -1,20 +1,22 @@
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import java.io.File;
+package br.com.simplePoi;
+
+import br.com.simplePoi.excel.ExcelFile;
+import br.com.simplePoi.reader.ExcelReader;
+import br.com.simplePoi.model.RegistroPlanilha;
+
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        var workbook = WorkbookFactory.create(new File("src/main/resources/data/sample1.xlsx"));
-        int numeroDePlanilhas = workbook.getNumberOfSheets();
-        System.out.println("Este arquivo possui " + numeroDePlanilhas + " planilhas.");
-        if (numeroDePlanilhas > 1){
-            System.out.println("O nome das planilhas são listados a seguir: ");
-            for (int i = 0; i < numeroDePlanilhas; i ++){
-                System.out.println("A planilha " + i + " possui o nome: " + workbook.getSheetName(i));
+    public static void main(String[] args) {
+        try (ExcelFile excel = new ExcelFile("src/main/resources/data/sample1.xlsx")) {
+            ExcelReader reader = new ExcelReader();
+            List<RegistroPlanilha> registros = reader.lerPrimeiraSheet(excel);
+
+            for (RegistroPlanilha r : registros) {
+                System.out.println(r.getNome() + " - " + r.getCpf() + " - " + r.getIdade());
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            System.out.println("O nome da planilha é: " + workbook.getSheetName(0) + ".");
-        }
-        workbook.close();
     }
 }
